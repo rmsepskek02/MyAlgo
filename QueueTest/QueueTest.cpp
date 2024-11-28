@@ -4,99 +4,110 @@
 #include <iostream>
 #include <list>
 #include <queue>
-#include <string>
+#include <deque>
 
 using namespace std;
 
-//배열로 환형 큐 구현
-template <typename T>
-class CircularQueue {
-private:
-	T* arr;				// 데이터가 저장될 배열
-	int front_idx;		// 맨 앞 데이터의 인덱스
-	int rear_index;		// 맨 뒤 데이터의 인덱스
-	int count;			// 큐에 들어간 데이터의 갯수
-	int capacity;		// 큐의 용량(데이터가 들어갈수 있는 총량)
-
-public:
-	// 생성자
-	CircularQueue(int sz) {
-		arr = new T[sz];
-		capacity = sz;
-		count = 0;
-		front_idx = 0;
-		rear_index = -1;
-	}
-	// 소멸자
-	~CircularQueue() {
-		delete[] arr;
-	}
-
-	// 맨 뒤 위치에 데이터 넣기
-	void enqueue(const T& e) {
-		//넣을 자리를 구한다
-		//rear_idx++;
-		if (full()) {
-			cout << "OVERFLOW ERR" << endl;
-			return;
-		}
-
-		rear_index = (rear_index + 1) % capacity;
-		arr[rear_index] = e;
-		count++;
-	}
-
-	// 맨 앞에 위치한 데이터 삭제
-	void dequeue() {
-		if (empty()) {
-			cout << "UNDERFLOW ERR" << endl;
-			return;
-		}
-
-		// front_idx의 위치를 오른쪽으로 이동한다
-		front_idx = (front_idx + 1) % capacity;
-		count--;
-	}
-
-	const T& front() const {
-		return arr[front_idx];
-	}
-
-	bool empty() const {
-		return count == 0;
-	}
-
-	bool full() const {
-		return count == capacity;
-	}
-
-	int size() const {
-		return count;
-	}
-};
-
 int main() {
-	CircularQueue<int> q(5);
+	deque<int> d{ 10,20,30,40 };
 
-	q.enqueue(10);
-	q.enqueue(20);
-	q.enqueue(30);
-	q.enqueue(40);
-	q.enqueue(50);
-	q.dequeue();
-	q.dequeue();
+	d.push_front(60);
+	d.push_back(70);
 
-	q.enqueue(60);
-	q.enqueue(70);
-
-	//q 출력
-	while (!q.empty()) {
-		auto& e = q.front();
+	for (auto e : d) {
 		cout << e << ", ";
-		q.dequeue();
 	}
-	cout << endl;
 }
+
+//배열로 환형 큐 구현
+//template <typename T>
+//class CircularQueue {
+//private:
+//	T* arr;				// 데이터가 저장될 배열
+//	int front_idx;		// 맨 앞 데이터의 인덱스
+//	int rear_index;		// 맨 뒤 데이터의 인덱스
+//	int count;			// 큐에 들어간 데이터의 갯수
+//	int capacity;		// 큐의 용량(데이터가 들어갈수 있는 총량)
+//
+//public:
+//	// 생성자
+//	CircularQueue(int sz) {
+//		arr = new T[sz];
+//		capacity = sz;
+//		count = 0;
+//		front_idx = 0;
+//		rear_index = -1;
+//	}
+//	// 소멸자
+//	~CircularQueue() {
+//		delete[] arr;
+//	}
+//
+//	// 맨 뒤 위치에 데이터 넣기
+//	void enqueue(const T& e) {
+//		//넣을 자리를 구한다
+//		//rear_idx++;
+//		if (full()) {
+//			cout << "OVERFLOW ERR" << endl;
+//			return;
+//		}
+//
+//		rear_index = (rear_index + 1) % capacity;
+//		arr[rear_index] = e;
+//		count++;
+//	}
+//
+//	// 맨 앞에 위치한 데이터 삭제
+//	void dequeue() {
+//		if (empty()) {
+//			cout << "UNDERFLOW ERR" << endl;
+//			return;
+//		}
+//
+//		// front_idx의 위치를 오른쪽으로 이동한다
+//		front_idx = (front_idx + 1) % capacity;
+//		count--;
+//	}
+//
+//	const T& front() const {
+//		return arr[front_idx];
+//	}
+//
+//	bool empty() const {
+//		return count == 0;
+//	}
+//
+//	bool full() const {
+//		return count == capacity;
+//	}
+//
+//	int size() const {
+//		return count;
+//	}
+//};
+//
+//int main() {
+//	CircularQueue<int> q(5);
+//
+//	q.enqueue(10);
+//	q.enqueue(20);
+//	q.enqueue(30);
+//	q.enqueue(40);
+//	q.enqueue(50);
+//	q.dequeue();
+//	q.dequeue();
+//
+//	q.enqueue(60);
+//	q.enqueue(70);
+//
+//	//q 출력
+//	while (!q.empty()) {
+//		auto& e = q.front();
+//		cout << e << ", ";
+//		q.dequeue();
+//	}
+//	cout << endl;
+//}
 
 //template <typename T>
 //class Queue {
