@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <numeric>
 
 using namespace std;
 
@@ -61,15 +62,15 @@ gcd(24,18) > gcd(18,24%18) -> gcd(18,6) -> gcd(6,18%6) -> gcd(6,0) -> 6
 */
 
 //최대 공약수
-int gcd(int a, int b) {
-	if (b == 0) return a;
-
-	return gcd(b, a % b);
-}
+//int gcd(int a, int b) {
+//	if (b == 0) return a;
+//
+//	return gcd(b, a % b);
+//}
 //최소 공배수
-int lcm(int a, int b) {
-	return a * b / gcd(a, b);
-}
+//int lcm(int a, int b) {
+//	return a * b / gcd(a, b);
+//}
 
 template <typename T>
 void print_vector(const vector<T> vec) {
